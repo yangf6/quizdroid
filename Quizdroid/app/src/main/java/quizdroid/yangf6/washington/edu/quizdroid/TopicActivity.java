@@ -34,7 +34,6 @@ public class TopicActivity extends Activity {
     Button submit;
     TextView yourAnswer;
     TextView correctAnswer;
-    ArrayList<Question> questions;
 
     String topic;
 
@@ -52,13 +51,10 @@ public class TopicActivity extends Activity {
         // show the appropriate topic overview page depending on what was clicked in MainActivity
         if (topic.equals("Math")) {
            setContentView(R.layout.activity_topic_math);
-            questions = getMathQuestions();
         } else if (topic.equals("Physics")) {
            setContentView(R.layout.activity_topic_physics);
-           questions = getPhysicsQuestions();
         } else {
             setContentView(R.layout.activity_topic_marvel);
-            questions = getMarvelQuestions();
         }
 
 
@@ -67,7 +63,6 @@ public class TopicActivity extends Activity {
             beginMath.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                i("TopicActivity", "begin math button clicked");
                     Intent startMath = new Intent(TopicActivity.this, QuestionActivity.class);
                     startMath.putExtra("topic", topic);
                     startActivity(startMath);
@@ -112,50 +107,4 @@ public class TopicActivity extends Activity {
         finish = (Button) findViewById(R.id.finish_btn);
        }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public ArrayList<Question> getMathQuestions() {
-        ArrayList<Question> questions = new ArrayList<Question>();
-        questions.add(new Question("What is 1 + 1?", "3", "2", "0", "1", "2"));
-        questions.add(new Question("What is the 2 raised to the sixth power?", "64", "4", "16", "32", "2"));
-        questions.add(new Question("What is the derivative of 5x^2?", "3x", "10x^2", "5x^2", "10x", "10x"));
-        return questions;
-    }
-
-    public ArrayList<Question> getPhysicsQuestions() {
-        ArrayList<Question> questions = new ArrayList<Question>();
-        questions.add(new Question("What is the acceleration of an object near the surface of the earth?", "9.8 m/s", "3.14 m/s^2", "4.9 m/s^2", "9.8 m/s^2", "9.8 m/s^2"));
-        questions.add(new Question("An object at rest will stay at rest until acted upon by an external force. This is known as Newton's:", "Second Law", "First Law", "Theory of Inertia", "Third Law", "First Law"));
-        questions.add(new Question("What is the equation for momentum?", "p = m*v", "p = d*v", "p = m * g * v", "p = I * r", "p = m*v"));
-        return questions;
-    }
-
-    public ArrayList<Question> getMarvelQuestions() {
-        ArrayList<Question> questions = new ArrayList<Question>();
-        questions.add(new Question("Which of the following is NOT a Marvel super hero?", "Spiderman", "Iron Man", "Batman", "Wolverine", "Batman"));
-        questions.add(new Question("What is the Hulk's real name?", "Dr. Banter", "Dr. Brown", "Dr. Bruce Bowen", "Dr. Bruce Banner", "Dr. Bruce Banner"));
-        questions.add(new Question("Which hero is played by actor Chris Evans?", "Captain America", "Flash", "Wolverine", "Spiderman", "Captain America"));
-        return questions;
-    }
 }
