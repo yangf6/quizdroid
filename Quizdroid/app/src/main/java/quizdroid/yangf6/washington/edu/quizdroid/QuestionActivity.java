@@ -25,7 +25,6 @@ public class QuestionActivity extends Activity {
 
         Intent launchingIntent = getIntent();
         topic = launchingIntent.getStringExtra("topic");
-        Bundle b = launchingIntent.getExtras();
 
 
         setContentView(R.layout.question_layout);

@@ -18,7 +18,6 @@ public class AnswerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bundle b = this.getIntent().getExtras();
         setContentView(R.layout.answer_layout);
 
         submit = (Button) findViewById(R.id.submit);

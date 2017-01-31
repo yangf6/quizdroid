@@ -23,21 +23,10 @@ public class TopicActivity extends Activity {
     Button beginPhysics;
     Button beginMarvel;
 
-    Button next;
-    Button finish;
-
-    RadioButton option1;
-    RadioButton option2;
-    RadioButton option3;
-    RadioButton option4;
-
     Button submit;
-    TextView yourAnswer;
-    TextView correctAnswer;
 
     String topic;
 
-    int pos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
