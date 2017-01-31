@@ -100,11 +100,7 @@ public class TopicActivity extends Activity {
             });
         }
 
-        submit = (Button) findViewById(R.id.submit_btn);
-        yourAnswer = (TextView) findViewById(R.id.your_answer_text);
-        correctAnswer = (TextView) findViewById(R.id.correct_answer_text);
-        next = (Button) findViewById(R.id.next_btn);
-        finish = (Button) findViewById(R.id.finish_btn);
+        submit = (Button) findViewById(R.id.submit);
        }
 
 }
