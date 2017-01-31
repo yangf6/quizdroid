@@ -16,8 +16,8 @@ public class QuestionActivity extends Activity {
 
     Button submit;
     String topic;
-    private RadioGroup radioGroup;
-    private RadioButton radioButton;
+    RadioGroup radioGroup;
+    RadioButton radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,6 @@ public class QuestionActivity extends Activity {
         topic = launchingIntent.getStringExtra("topic");
         Bundle b = launchingIntent.getExtras();
 
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
 
         setContentView(R.layout.question_layout);
 
@@ -37,6 +35,8 @@ public class QuestionActivity extends Activity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+                radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                 if(radioButton != null) {
                     Intent showAnswer = new Intent(QuestionActivity.this, AnswerActivity.class);
                     RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
