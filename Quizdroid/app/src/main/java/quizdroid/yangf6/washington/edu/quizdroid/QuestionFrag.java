@@ -43,7 +43,7 @@ public class QuestionFrag extends Fragment {
             public void onClick(View v) {
                 RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
                 RadioButton radioButton = (RadioButton) view.findViewById(radioGroup.getCheckedRadioButtonId());
-//                boolean end = false;
+                end = false;
                 if (radioButton != null) {
                     total_questions++;
                     if (total_questions == 3) {
