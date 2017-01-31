@@ -1,5 +1,6 @@
 package quizdroid.yangf6.washington.edu.quizdroid;
 
+
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -13,7 +14,9 @@ import android.widget.Button;
  * A simple {@link Fragment} subclass.
  */
 public class SupFrag extends Fragment {
-    Button beginPhysics;
+
+
+    Button beginSup;
     String topic;
 
     public SupFrag() {
@@ -22,17 +25,15 @@ public class SupFrag extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_topic_physics,
-                container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_topic_marvel, container, false);
 
         if (getArguments() != null) {
             topic = getArguments().getString("topic");
         }
 
-        beginPhysics = (Button) view.findViewById(R.id.physics_begin);
-        beginPhysics.setOnClickListener(new View.OnClickListener() {
+        beginSup = (Button) view.findViewById(R.id.marvel_begin);
+        beginSup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
@@ -47,7 +48,6 @@ public class SupFrag extends Fragment {
         });
 
         return view;
-
     }
 
 }

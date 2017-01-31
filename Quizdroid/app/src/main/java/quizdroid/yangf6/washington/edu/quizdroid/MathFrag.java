@@ -1,18 +1,23 @@
 package quizdroid.yangf6.washington.edu.quizdroid;
 
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MathFrag extends Fragment {
 
+
+    Button beginMath;
+    String topic;
 
     public MathFrag() {
         // Required empty public constructor
@@ -22,9 +27,29 @@ public class MathFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        View view = inflater.inflate(R.layout.activity_topic_math,
+                container, false);
+
+        if (getArguments() != null) {
+            topic = getArguments().getString("topic");
+        }
+
+        beginMath = (Button) view.findViewById(R.id.math_begin);
+        beginMath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                QuestionFrag questionFragment = new QuestionFrag();
+                Bundle info = new Bundle();
+                info.putString("topic", topic);
+                questionFragment.setArguments(info);
+                ft.replace(R.id.container, questionFragment);
+                ft.commit();
+            }
+        });
+
+        return view;
     }
 
 }

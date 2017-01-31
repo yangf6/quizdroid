@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
+
 
 
 public class QuestionFrag extends Fragment {
@@ -41,7 +41,7 @@ public class QuestionFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
-                RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
+                RadioButton radioButton = (RadioButton) view.findViewById(radioGroup.getCheckedRadioButtonId());
                 if (radioButton != null) {
                     String selection = radioButton.getText().toString();
                     total_questions++;
@@ -59,6 +59,13 @@ public class QuestionFrag extends Fragment {
                 }
             }
         });
+        return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.hostActivity = activity;
     }
 
 }
