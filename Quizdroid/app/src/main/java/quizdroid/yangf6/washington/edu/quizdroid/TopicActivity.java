@@ -19,17 +19,9 @@ import static android.util.Log.i;
 
 public class TopicActivity extends Activity {
 
-    Button beginMath;
-    Button beginPhysics;
-    Button beginMarvel;
-
     Button next;
     Button finish;
 
-    RadioButton option1;
-    RadioButton option2;
-    RadioButton option3;
-    RadioButton option4;
 
     Button submit;
     TextView yourAnswer;
@@ -37,7 +29,6 @@ public class TopicActivity extends Activity {
 
     String topic;
 
-    int pos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,59 +39,71 @@ public class TopicActivity extends Activity {
         Bundle b = launchingIntent.getExtras();
         topic = b.getString("topic");
 
-        // show the appropriate topic overview page depending on what was clicked in MainActivity
+        setContentView(R.layout.topic_layout);
+
+
         if (topic.equals("Math")) {
-           setContentView(R.layout.activity_topic_math);
+            addMathFragment();
         } else if (topic.equals("Physics")) {
-           setContentView(R.layout.activity_topic_physics);
+            addPhysicsFragment();
         } else {
-            setContentView(R.layout.activity_topic_marvel);
+            addMarvelFragment();
         }
 
-
-        beginMath = (Button) findViewById(R.id.math_begin);
-        if (beginMath != null) {
-            beginMath.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent startMath = new Intent(TopicActivity.this, QuestionActivity.class);
-                    startMath.putExtra("topic", topic);
-                    startActivity(startMath);
-                    finish();
-                }
-            });
-        }
+        submit = (Button) findViewById(R.id.submit_btn);
+        yourAnswer = (TextView) findViewById(R.id.your_answer_text);
+        correctAnswer = (TextView) findViewById(R.id.correct_answer_text);
+        next = (Button) findViewById(R.id.next_btn);
+        finish = (Button) findViewById(R.id.finish_btn);
 
 
-        beginPhysics = (Button) findViewById(R.id.physics_begin);
-        if (beginPhysics != null) {
-            beginPhysics.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    i("TopicActivity", "begin physics button clicked");
-                    Intent startPhysics = new Intent(TopicActivity.this, QuestionActivity.class);
-                    startPhysics.putExtra("topic", topic);
-                    startActivity(startPhysics);
-                    finish();
-                }
-            });
-        }
+    public void loadAnswerFrag(Bundle info) {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        AnswerFragment answerFragment = new AnswerFragment();
+        answerFragment.setArguments(info);
+        ft.replace(R.id.container, answerFragment);
+        ft.commit();
+    }
 
-        beginMarvel = (Button) findViewById(R.id.marvel_begin);
-        if (beginMarvel != null) {
-            beginMarvel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    i("TopicActivity", "begin marvel button clicked");
-                    Intent startMarvel = new Intent(TopicActivity.this, QuestionActivity.class);
-                    startMarvel.putExtra("topic", topic);
-                    startActivity(startMarvel);
-                    finish();
-                }
-            });
-        }
+    public void loadQuestionFragment(Bundle info) {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        QuestionFragment questionFragment = new QuestionFragment();
+        questionFragment.setArguments(info);
+        ft.replace(R.id.container, questionFragment);
+        ft.commit();
+    }
 
-        submit = (Button) findViewById(R.id.submit);
-       }
+
+    private void addMathFragment() {
+        // creating instance of the HelloWorldFragment.
+        MathFragment mathFragment = new MathFragment();
+        Bundle info = new Bundle();
+        info.putString("topic", topic);
+        mathFragment.setArguments(info);
+        // adding fragment to relative layout by using layout id
+        getFragmentManager().beginTransaction().add(R.id.container, mathFragment).commit();
+    }
+
+    private void addPhysicsFragment() {
+        // creating instance of the HelloWorldFragment.
+        PhysicsFragment physicsFragment = new PhysicsFragment();
+        Bundle info = new Bundle();
+        info.putString("topic", topic);
+        physicsFragment.setArguments(info);
+        // adding fragment to relative layout by using layout id
+        getFragmentManager().beginTransaction().add(R.id.container, physicsFragment).commit();
+    }
+
+    private void addMarvelFragment() {
+        // creating instance of the HelloWorldFragment.
+        MarvelFragment marvelFragment = new MarvelFragment();
+        Bundle info = new Bundle();
+        info.putString("topic", topic);
+        marvelFragment.setArguments(info);
+        // adding fragment to relative layout by using layout id
+        getFragmentManager().beginTransaction().add(R.id.container, marvelFragment).commit();
+    }
 
 }

@@ -4,4 +4,7 @@
     <string name="math_desc">These are questions relating to Mathematics. There will be geometry, algebra, and calculus questions in this topic.</string>
     <string name="physics_desc">These are questions relating to Physics. This section will probably suck a lot.</string>
     <string name="marvel_desc">These are questions relating to Marvel Super Heroes. This section will be a lot of fun.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
