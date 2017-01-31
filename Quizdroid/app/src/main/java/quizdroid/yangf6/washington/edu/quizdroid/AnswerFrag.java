@@ -15,10 +15,11 @@ import android.widget.TextView;
 public class AnswerFrag extends Fragment {
 
     View view;
-    int total_questions;
     String topic;
     private Activity hostActivity;
     TextView status;
+    public static int total_questions = 0;
+    public static boolean end = false;
 
 
 
@@ -28,11 +29,10 @@ public class AnswerFrag extends Fragment {
         view = inflater.inflate(R.layout.answer_layout,
                 container, false);
 
-        boolean hasMoreQuestions = false;
         if (getArguments() != null) {
             total_questions = getArguments().getInt("totalQuestions");
             topic = getArguments().getString("topic");
-            hasMoreQuestions = getArguments().getBoolean("hasMoreQuestions");
+            end = getArguments().getBoolean("end");
         }
         status = (TextView) view.findViewById(R.id.total_correct_text);
         status.setText("You have " + total_questions + " out of 3 correct");
@@ -56,12 +56,11 @@ public class AnswerFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent startOver = new Intent(getActivity(), MainActivity.class);
-                startOver.putExtra("pos", 0);
                 startActivity(startOver);
             }
         });
 
-        if (hasMoreQuestions) {
+        if (!end) {
             next.setVisibility(View.VISIBLE);
             finish.setVisibility(View.GONE);
         } else {

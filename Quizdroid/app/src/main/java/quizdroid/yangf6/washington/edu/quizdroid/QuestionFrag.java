@@ -18,9 +18,10 @@ public class QuestionFrag extends Fragment {
 
 
     View view;
-    int total_questions;
     String topic;
     private Activity hostActivity;
+    public static int total_questions = 0;
+    public static boolean end = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,11 +43,10 @@ public class QuestionFrag extends Fragment {
             public void onClick(View v) {
                 RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
                 RadioButton radioButton = (RadioButton) view.findViewById(radioGroup.getCheckedRadioButtonId());
+//                boolean end = false;
                 if (radioButton != null) {
-                    String selection = radioButton.getText().toString();
                     total_questions++;
-                    boolean end = false;
-                    if (total_questions >= 3) {
+                    if (total_questions == 3) {
                         end = true;
                     }
                     Bundle info = new Bundle();

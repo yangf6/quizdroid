@@ -11,21 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-import static android.util.Log.i;
 
 
 public class TopicActivity extends Activity {
 
     Button next;
     Button finish;
-
-
     Button submit;
-    TextView yourAnswer;
-    TextView correctAnswer;
-
     String topic;
 
 
