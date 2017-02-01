@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import java.util.ArrayList;
-
 
 public class QuestionActivity extends Activity {
 
@@ -38,7 +36,6 @@ public class QuestionActivity extends Activity {
                 radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                 if(radioButton != null) {
                     Intent showAnswer = new Intent(QuestionActivity.this, AnswerActivity.class);
-                    RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
                     startActivity(showAnswer);
                     finish();
                 }
