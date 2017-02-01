@@ -21,8 +21,8 @@ public class QuestionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent launchingIntent = getIntent();
-        topic = launchingIntent.getStringExtra("topic");
+        Intent i = getIntent();
+        topic = i.getStringExtra("topic");
 
 
         setContentView(R.layout.question_layout);

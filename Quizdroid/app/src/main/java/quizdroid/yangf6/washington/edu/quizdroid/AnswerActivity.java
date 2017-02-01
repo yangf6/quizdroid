@@ -16,8 +16,6 @@ public class AnswerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         setContentView(R.layout.answer_layout);
 
         submit = (Button) findViewById(R.id.submit);
