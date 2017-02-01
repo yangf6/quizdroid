@@ -42,11 +42,11 @@ public class AnswerFrag extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle info = new Bundle();
-                info.putInt("totalQuestions", total_questions);
-                info.putString("topic", topic);
+                Bundle b = new Bundle();
+                b.putInt("totalQuestions", total_questions);
+                b.putString("topic", topic);
                 if (hostActivity instanceof TopicActivity) {
-                    ((TopicActivity) hostActivity).loadQuestionFragment(info);
+                    ((TopicActivity) hostActivity).loadQuestionFragment(b);
                 }
             }
         });
