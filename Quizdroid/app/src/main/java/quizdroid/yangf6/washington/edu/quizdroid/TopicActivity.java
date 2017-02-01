@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 
 
@@ -46,20 +45,20 @@ public class TopicActivity extends Activity {
         finish = (Button) findViewById(R.id.finish_btn);
     }
 
-    public void loadAnswerFrag(Bundle info) {
+    public void loadAnswerFrag(Bundle b) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         AnswerFrag answerFragment = new AnswerFrag();
-        answerFragment.setArguments(info);
+        answerFragment.setArguments(b);
         ft.replace(R.id.container, answerFragment);
         ft.commit();
     }
 
-    public void loadQuestionFragment(Bundle info) {
+    public void loadQuestionFragment(Bundle b) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         QuestionFrag questionFragment = new QuestionFrag();
-        questionFragment.setArguments(info);
+        questionFragment.setArguments(b);
         ft.replace(R.id.container, questionFragment);
         ft.commit();
     }
@@ -67,26 +66,35 @@ public class TopicActivity extends Activity {
 
     private void addMathFragment() {
         MathFrag mathFragment = new MathFrag();
-        Bundle info = new Bundle();
-        info.putString("topic", topic);
-        mathFragment.setArguments(info);
-        getFragmentManager().beginTransaction().add(R.id.container, mathFragment).commit();
+        Bundle b = new Bundle();
+        b.putString("topic", topic);
+        mathFragment.setArguments(b);
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.container, mathFragment)
+                .commit();
     }
 
     private void addPhysicsFragment() {
         PhyFrag physicsFragment = new PhyFrag();
-        Bundle info = new Bundle();
-        info.putString("topic", topic);
-        physicsFragment.setArguments(info);
-        getFragmentManager().beginTransaction().add(R.id.container, physicsFragment).commit();
+        Bundle b = new Bundle();
+        b.putString("topic", topic);
+        physicsFragment.setArguments(b);
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.container, physicsFragment)
+                .commit();
     }
 
     private void addMarvelFragment() {
         SupFrag marvelFragment = new SupFrag();
-        Bundle info = new Bundle();
-        info.putString("topic", topic);
-        marvelFragment.setArguments(info);
-        getFragmentManager().beginTransaction().add(R.id.container, marvelFragment).commit();
+        Bundle b = new Bundle();
+        b.putString("topic", topic);
+        marvelFragment.setArguments(b);
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.container, marvelFragment)
+                .commit();
     }
 
 }
