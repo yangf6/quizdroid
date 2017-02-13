@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".QuestionFrag">
         </activity>
+        <activity android:name=".QuizApp">
+        </activity>
     </application>
 
 </manifest>
