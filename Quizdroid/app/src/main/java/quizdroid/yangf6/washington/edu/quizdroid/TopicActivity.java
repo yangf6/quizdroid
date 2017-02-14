@@ -7,6 +7,8 @@ import android.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import java.util.List;
@@ -34,11 +36,19 @@ public class TopicActivity extends Activity {
         QuizApp quizApp = (QuizApp) getApplication();
         List<Topic> topicList = quizApp.getTopics();
 
-        addContentviewFrag();
+        loadContentviewFrag();
 
         submit = (Button) findViewById(R.id.submit_btn);
         next = (Button) findViewById(R.id.next_btn);
         finish = (Button) findViewById(R.id.finish_btn);
+    }
+
+    private void  loadContentviewFrag(){
+        ContentviewFrag contentviewFrag = new ContentviewFrag();
+        Bundle info = new Bundle();
+        info.putString("topic",topic);
+        contentviewFrag.setArguments(info);
+        getFragmentManager().beginTransaction().add(R.id.container, contentviewFrag).commit();
     }
 
     public void loadAnswerFrag(Bundle b) {
@@ -59,38 +69,24 @@ public class TopicActivity extends Activity {
         ft.commit();
     }
 
-
-    private void addMathFragment() {
-        MathFrag mathFragment = new MathFrag();
-        Bundle b = new Bundle();
-        b.putString("topic", topic);
-        mathFragment.setArguments(b);
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.container, mathFragment)
-                .commit();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
-    private void addPhysicsFragment() {
-        PhyFrag physicsFragment = new PhyFrag();
-        Bundle b = new Bundle();
-        b.putString("topic", topic);
-        physicsFragment.setArguments(b);
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.container, physicsFragment)
-                .commit();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
-    private void addMarvelFragment() {
-        SupFrag marvelFragment = new SupFrag();
-        Bundle b = new Bundle();
-        b.putString("topic", topic);
-        marvelFragment.setArguments(b);
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.container, marvelFragment)
-                .commit();
-    }
+
+
 
 }

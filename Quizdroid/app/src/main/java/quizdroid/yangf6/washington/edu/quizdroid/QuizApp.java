@@ -34,5 +34,6 @@ public class QuizApp extends Application {
     public void onCreate(){
         super.onCreate();
         Log.d(TAG, "it's running!");
+
     }
 }
