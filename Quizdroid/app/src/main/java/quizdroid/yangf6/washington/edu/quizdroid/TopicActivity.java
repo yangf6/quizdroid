@@ -17,60 +17,62 @@ import java.util.List;
 
 public class TopicActivity extends Activity {
 
-    Button next;
-    Button finish;
-    Button submit;
-    String topic;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        Intent launchingIntent = getIntent();
-        Bundle b = launchingIntent.getExtras();
-        topic = b.getString("topic");
-
         setContentView(R.layout.topic_layout);
-        QuizApp quizApp = (QuizApp) getApplication();
-        List<Topic> topicList = quizApp.getTopics();
 
-        loadContentviewFrag();
+        Bundle bundle = new Bundle();
+        bundle = getIntent().getExtras();
 
-        submit = (Button) findViewById(R.id.submit_btn);
-        next = (Button) findViewById(R.id.next_btn);
-        finish = (Button) findViewById(R.id.finish_btn);
-    }
-
-    private void  loadContentviewFrag(){
-        ContentviewFrag contentviewFrag = new ContentviewFrag();
-        Bundle info = new Bundle();
-        info.putString("topic",topic);
-        contentviewFrag.setArguments(info);
-        getFragmentManager().beginTransaction().add(R.id.container, contentviewFrag).commit();
-    }
-
-    public void loadAnswerFrag(Bundle b) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        AnswerFrag answerFragment = new AnswerFrag();
-        answerFragment.setArguments(b);
-        ft.replace(R.id.container, answerFragment);
+
+        ContentviewFrag contentviewFrag = new ContentviewFrag();
+        contentviewFrag.setArguments(bundle);
+
+        ft.add(R.id.container, contentviewFrag);
         ft.commit();
     }
 
-    public void loadQuestionFragment(Bundle b) {
+    public void loadQuestionFrag(int questionNumber, int correctAnswers, Topic topic) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        QuestionFrag questionFragment = new QuestionFrag();
-        questionFragment.setArguments(b);
-        ft.replace(R.id.container, questionFragment);
+
+        Bundle topicBundle = new Bundle();
+        topicBundle.putInt("questionNumber", questionNumber);
+        topicBundle.putInt("correctAnswers", correctAnswers);
+        topicBundle.putSerializable("topic", topic);
+
+        QuestionFrag questionFrag = new QuestionFrag();
+        questionFrag.setArguments(topicBundle);
+
+        ft.replace(R.id.container, questionFrag);
+        ft.commit();
+    }
+
+    public void loadAnswerFrag(String userAnswer, String correctAnswer, int correctAnswers,
+                               Topic topic, int questionNumber) {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        Bundle topicBundle = new Bundle();
+        topicBundle.putString("userAnswer", userAnswer);
+        topicBundle.putString("correctAnswer", correctAnswer);
+        topicBundle.putInt("correctAnswers", correctAnswers);
+        topicBundle.putInt("questionNumber", questionNumber);
+        topicBundle.putSerializable("topic", topic);
+
+        AnswerFrag answerFrag = new AnswerFrag();
+        answerFrag.setArguments(topicBundle);
+
+        ft.replace(R.id.container, answerFrag);
         ft.commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -85,8 +87,4 @@ public class TopicActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 }

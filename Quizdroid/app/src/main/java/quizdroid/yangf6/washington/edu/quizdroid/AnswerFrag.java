@@ -1,80 +1,83 @@
 package quizdroid.yangf6.washington.edu.quizdroid;
 
+
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-
-
 public class AnswerFrag extends Fragment {
-
-    View view;
-    String topic;
+    private String userAnswer;
+    private String correctAnswer;
+    private int correctAnswerCount;
+    private Topic topic;
+    private int questionNumber;
     private Activity hostActivity;
-    TextView status;
-    public static int total_questions = 0;
-    public static boolean end = false;
-
-
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.answer_layout,
-                container, false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            total_questions = getArguments().getInt("totalQuestions");
-            topic = getArguments().getString("topic");
-            end = getArguments().getBoolean("end");
+//            userAnswer = getArguments().getString("userAnswer");
+//            correctAnswer = getArguments().getString("correctAnswer");
+            correctAnswerCount = getArguments().getInt("correctAnswers");
+            topic = (Topic) getArguments().getSerializable("topic");
+            questionNumber = getArguments().getInt("questionNumber");
         }
-        status = (TextView) view.findViewById(R.id.total_correct_text);
-        status.setText("You have " + total_questions + " out of 3 correct");
+    }
 
+    public AnswerFrag() {}
 
-        Button next = (Button) view.findViewById(R.id.next_btn);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.answer_layout, container, false);
+
+//        TextView userAnswerView = (TextView) rootView.findViewById(R.id.userAnswer);
+//        TextView correctAnswerView = (TextView) rootView.findViewById(R.id.correctAnswer);
+        TextView score = (TextView) rootView.findViewById(R.id.total_correct_text);
+        Button next = (Button) rootView.findViewById(R.id.next_btn);
+
+        // Sets correct page on the layout
+//        userAnswerView.setText(userAnswer);
+//        correctAnswerView.setText(correctAnswer);
+        score.setText(correctAnswerCount + " answers correct out of " + (questionNumber + 1));
+        final boolean finished = (questionNumber == topic.getQ().size() - 1);
+
+        if (finished) {
+            next.setText("Finish");
+        }
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putInt("totalQuestions", total_questions);
-                b.putString("topic", topic);
+            public void onClick(View view) {
                 if (hostActivity instanceof TopicActivity) {
-                    ((TopicActivity) hostActivity).loadQuestionFragment(b);
+                    if (finished) {
+                        Intent i = new Intent(getActivity(), MainActivity.class);
+                        startActivity(i);
+                    } else {
+                        ((TopicActivity) hostActivity).loadQuestionFrag(questionNumber + 1,
+                                correctAnswerCount, topic);
+                    }
                 }
             }
         });
 
-        Button finish = (Button) view.findViewById(R.id.finish_btn);
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent startOver = new Intent(getActivity(), MainActivity.class);
-                startActivity(startOver);
-            }
-        });
 
-        if (!end) {
-            next.setVisibility(View.VISIBLE);
-            finish.setVisibility(View.GONE);
-        } else {
-            next.setVisibility(View.GONE);
-            finish.setVisibility(View.VISIBLE);
-        }
-
-
-        return view;
+        return rootView;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         this.hostActivity = activity;
     }
 }
+

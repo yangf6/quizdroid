@@ -23,7 +23,7 @@ public class QuizApp extends Application {
             throw new RuntimeException("Cannot create more than one " + TAG);
         }
         topics = new ArrayList<Topic>();
-        quiz = new TopicRepository();
+        quiz = new inMemoryRepository();
     }
 
     public List<Topic> getTopics(){

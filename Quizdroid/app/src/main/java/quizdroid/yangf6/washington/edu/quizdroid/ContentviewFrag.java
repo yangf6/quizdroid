@@ -2,95 +2,67 @@ package quizdroid.yangf6.washington.edu.quizdroid;
 
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
-
-import static android.util.Log.i;
-
-public class ContentviewFrag extends android.app.Fragment {
-
-    Button begin;
-    String topic;
-    int position;
-
-    private static final String TAG = "ContentviewFrag";
-
-    private List<Topic> topicsList;
-
+public class ContentviewFrag extends Fragment {
+    private Topic topic;
     private Activity hostActivity;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public ContentviewFrag() {}
 
-        View view = inflater.inflate(R.layout.overview_layout,
-                container, false);
+    public int getShownIndex() {
+        return getArguments().getInt("index", 0);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            topic = getArguments().getString("topic");
-            position = getArguments().getInt("pos");
-            Log.i(TAG, "position in overviewfrag = " + position);
+            topic = (Topic) getArguments().getSerializable("topic");
         }
-        getTopicsArray();
+    }
 
-//        if (hostActivity instanceof TopicActivity) {
-//            ((TopicActivity) hostActivity).loadOverviewFragment(info);
-//        }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_contentview, container, false);
 
-//        String[] topicsArray = getTopicsArray();
-        TextView topicTitle = (TextView) view.findViewById(R.id.topic_title);
-        TextView topicDesc = (TextView) view.findViewById(R.id.topic_desc);
-        TextView totalQuestions = (TextView) view.findViewById(R.id.total_question_text);
+        // Gets views for description, topic, question
+        TextView topicView = (TextView) rootView.findViewById(R.id.topic);
+        TextView descriptionView = (TextView) rootView.findViewById(R.id.description);
+        TextView questionView = (TextView) rootView.findViewById(R.id.questionCount);
 
-        topicTitle.setText(topicsList.get(position).getTitle());
-        topicDesc.setText(topicsList.get(position).getShort_desc());
-        totalQuestions.setText("Total Questions: " + topicsList.get(position).getQuestions().size());
+        // Sets text for views
+        topicView.setText(topic.getTitle());
+        descriptionView.setText(topic.getLong());
 
-        begin = (Button) view.findViewById(R.id.begin);
-        begin.setOnClickListener(new View.OnClickListener() {
+        questionView.setText("There are " + topic.getQ().size() + " questions");
+
+
+        Button beginButton = (Button) rootView.findViewById(R.id.beginButton);
+
+        beginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                i(TAG, "begin button clicked for " + topic);
-
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                QuestionFragment questionFragment = new QuestionFragment();
-                Bundle info = new Bundle();
-//                info.putString("topic", topic);
-                info.putInt("topic", position);   // specifies which topic we are currently working with
-                questionFragment.setArguments(info);
-                ft.replace(R.id.container, questionFragment);
-                ft.commit();
+            public void onClick(View view) {
+                if (hostActivity instanceof TopicActivity) {
+                        ((TopicActivity) hostActivity).loadQuestionFrag(0, 0, topic);
+                }
             }
         });
-        return view;
+        return rootView;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         this.hostActivity = activity;
     }
-
-    public String[] getTopicsArray() {
-        QuizApp quizApp = (QuizApp) getActivity().getApplication();
-        topicsList = quizApp.getTopics();
-        String []topics = new String[topicsList.size()];
-        int pos = 0;
-        for (Topic t : topicsList) {
-            topics[pos] = t.getTitle();
-            pos++;
-        }
-        return topics;
-    }
-
 }

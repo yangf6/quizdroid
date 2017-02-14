@@ -1,10 +1,12 @@
 package quizdroid.yangf6.washington.edu.quizdroid;
 
+import java.io.Serializable;
+
 /**
  * Created by apple on 2/12/17.
  */
 
-public class Question {
+public class Question implements Serializable{
     private String question;
     private String anwser1;
     private String anwser2;

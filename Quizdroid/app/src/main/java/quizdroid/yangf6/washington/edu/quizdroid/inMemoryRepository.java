@@ -33,9 +33,9 @@ public class inMemoryRepository implements TopicRepository {
                 "The Rolling Stone", 2));
 
 
-        Topic math = new Topic("Math","Worst topic of all time", mathQuestions);
-        Topic physics = new Topic("Physics", "Find out how close you compare to Albert", physicsQuestions);
-        Topic marvel = new Topic("Marvel Super Heroes", "Find out how much you know about Marvel\'s own superheroes", marvelQuestions);
+        Topic math = new Topic("Math","Worst topic of all time","long descr", mathQuestions);
+        Topic physics = new Topic("Physics", "Find out how close you compare to Albert", "long descr", physicsQuestions);
+        Topic marvel = new Topic("Marvel Super Heroes", "Find out how much you know about Marvel\'s own superheroes","long descr", marvelQuestions);
 
         topics.add(math);
         topics.add(physics);

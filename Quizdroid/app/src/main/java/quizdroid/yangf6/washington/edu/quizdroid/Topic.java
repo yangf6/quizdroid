@@ -1,11 +1,12 @@
 package quizdroid.yangf6.washington.edu.quizdroid;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by apple on 2/12/17.
  */
 
-public class Topic {
+public class Topic implements Serializable {
     private String title;
     private String shortDescr;
     private String longDescr;
