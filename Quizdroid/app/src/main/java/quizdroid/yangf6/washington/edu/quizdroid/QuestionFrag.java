@@ -37,7 +37,6 @@ public class QuestionFrag extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.question_layout, container, false);
 
-        // gets the views for question, radio button options, and submit button
         TextView question = (TextView) rootView.findViewById(R.id.question_title_text_view);
         TextView answer1 = (TextView) rootView.findViewById(R.id.radioButton1);
         TextView answer2 = (TextView) rootView.findViewById(R.id.radioButton2);
@@ -46,7 +45,6 @@ public class QuestionFrag extends Fragment {
         final Button submit = (Button) rootView.findViewById(R.id.submit_btn);
         final RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
 
-        // shows the next submit button as soon as an option is selected
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -54,7 +52,6 @@ public class QuestionFrag extends Fragment {
             }
         });
 
-        // populates views with question and answer options
         final Question curQuestion = topic.getQ().get(questionNumber);
         question.setText(curQuestion.getQuestion());
         answer1.setText(curQuestion.getAnswer1());
@@ -79,7 +76,6 @@ public class QuestionFrag extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // gets selected button and determines if the answer was correct
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 RadioButton selected = (RadioButton) rootView.findViewById(selectedId);
                 boolean correct = selected.getText().equals(correctAnswer);
@@ -94,11 +90,11 @@ public class QuestionFrag extends Fragment {
 
         return rootView;
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        this.hostActivity = activity;
-    }
+//
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//
+//        this.hostActivity = activity;
+//    }
 }
