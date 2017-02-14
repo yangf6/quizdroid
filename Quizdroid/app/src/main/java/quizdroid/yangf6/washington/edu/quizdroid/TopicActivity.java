@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import java.util.List;
 
 
 
@@ -30,15 +31,10 @@ public class TopicActivity extends Activity {
         topic = b.getString("topic");
 
         setContentView(R.layout.topic_layout);
+        QuizApp quizApp = (QuizApp) getApplication();
+        List<Topic> topicList = quizApp.getTopics();
 
-
-        if (topic.equals("Math")) {
-            addMathFragment();
-        } else if (topic.equals("Physics")) {
-            addPhysicsFragment();
-        } else {
-            addMarvelFragment();
-        }
+        addContentviewFrag();
 
         submit = (Button) findViewById(R.id.submit_btn);
         next = (Button) findViewById(R.id.next_btn);
