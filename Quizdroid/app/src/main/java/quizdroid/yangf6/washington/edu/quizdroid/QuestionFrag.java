@@ -36,7 +36,6 @@ public class QuestionFrag extends Fragment {
             total_questions = 0;
             topic = "";
         }
-
         Button submit = (Button) view.findViewById(R.id.submit_btn);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
