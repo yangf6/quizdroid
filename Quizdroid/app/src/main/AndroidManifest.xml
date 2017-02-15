@@ -5,23 +5,20 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="QuizApp"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:label="@string/app_name"
+        android:name=".QuizApp"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TopicActivity">
-        </activity>
-        <activity android:name=".AnswerFrag">
-        </activity>
-        <activity android:name=".QuestionFrag">
-        </activity>
-        <activity android:name=".QuizApp">
+        <activity
+            android:name=".TopicActivity">
         </activity>
     </application>
 
