@@ -23,7 +23,7 @@ public class iconArrayAdapter extends ArrayAdapter<String> {
         this.context = context;
         this.values = values;
     }
-    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

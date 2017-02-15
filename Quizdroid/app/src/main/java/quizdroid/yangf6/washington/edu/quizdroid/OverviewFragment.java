@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ContentviewFrag extends Fragment {
+public class OverviewFragment extends Fragment {
     private Topic topic;
     private Activity hostActivity;
 
-    public ContentviewFrag() {}
+    public OverviewFragment() {
+        // Required empty public constructor
+    }
 
     public int getShownIndex() {
         return getArguments().getInt("index", 0);
@@ -32,16 +34,18 @@ public class ContentviewFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_contentview, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_overview, container, false);
 
+        // Gets views for description, topic, question
         TextView topicView = (TextView) rootView.findViewById(R.id.topic);
         TextView descriptionView = (TextView) rootView.findViewById(R.id.description);
         TextView questionView = (TextView) rootView.findViewById(R.id.questionCount);
 
+        // Sets text for views
         topicView.setText(topic.getTitle());
-        descriptionView.setText(topic.getLong());
+        descriptionView.setText(topic.getDescription());
 
-        questionView.setText("There are " + topic.getQ().size() + " questions");
+        questionView.setText("There are " + topic.getQuestions().size() + " questions");
 
 
         Button beginButton = (Button) rootView.findViewById(R.id.beginButton);
@@ -50,7 +54,7 @@ public class ContentviewFrag extends Fragment {
             @Override
             public void onClick(View view) {
                 if (hostActivity instanceof TopicActivity) {
-                        ((TopicActivity) hostActivity).loadQuestionFrag(0, 0, topic);
+                    ((TopicActivity) hostActivity).loadQuestionFrag(0, 0, topic);
                 }
             }
         });

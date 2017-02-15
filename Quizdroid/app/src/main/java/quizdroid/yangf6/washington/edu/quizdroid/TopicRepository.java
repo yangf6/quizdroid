@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface TopicRepository {
 
-    public List<Topic> getTopics();
+    public List<Topic> getAllTopics();
 
     public void setTopics(List<Topic> topics);
 }

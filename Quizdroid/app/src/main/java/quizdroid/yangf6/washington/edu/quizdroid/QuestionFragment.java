@@ -10,17 +10,18 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import java.lang.String;
 
 import java.util.List;
 
-public class QuestionFrag extends Fragment {
+public class QuestionFragment extends Fragment {
     private Topic topic;
     private int questionNumber;
     private int correctAnswers;
     private Activity hostActivity;
 
-    public QuestionFrag() {}
+    public QuestionFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,16 +37,18 @@ public class QuestionFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.question_layout, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_questions, container, false);
 
-        TextView question = (TextView) rootView.findViewById(R.id.question_title_text_view);
-        TextView answer1 = (TextView) rootView.findViewById(R.id.radioButton1);
-        TextView answer2 = (TextView) rootView.findViewById(R.id.radioButton2);
-        TextView answer3 = (TextView) rootView.findViewById(R.id.radioButton3);
-        TextView answer4 = (TextView) rootView.findViewById(R.id.radioButton4);
-        final Button submit = (Button) rootView.findViewById(R.id.submit_btn);
+        // gets the views for question, radio button options, and submit button
+        TextView question = (TextView) rootView.findViewById(R.id.question);
+        TextView answer1 = (TextView) rootView.findViewById(R.id.answer1);
+        TextView answer2 = (TextView) rootView.findViewById(R.id.answer2);
+        TextView answer3 = (TextView) rootView.findViewById(R.id.answer3);
+        TextView answer4 = (TextView) rootView.findViewById(R.id.answer4);
+        final Button submit = (Button) rootView.findViewById(R.id.submitButton);
         final RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
 
+        // shows the next submit button as soon as an option is selected
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -53,15 +56,16 @@ public class QuestionFrag extends Fragment {
             }
         });
 
-        final Question curQuestion = topic.getQ().get(questionNumber);
-        question.setText(curQuestion.getQuestion());
+        // populates views with question and answer options
+        final Quiz curQuestion = topic.getQuestions().get(questionNumber);
+        question.setText(curQuestion.getText());
         answer1.setText(curQuestion.getAnswer1());
         answer2.setText(curQuestion.getAnswer2());
         answer3.setText(curQuestion.getAnswer3());
         answer4.setText(curQuestion.getAnswer4());
 
         String answer = "";
-        switch(curQuestion.getCorrect()) {
+        switch(curQuestion.getCorrectAnswer()) {
             case 1: answer = curQuestion.getAnswer1();
                 break;
             case 2: answer = curQuestion.getAnswer2();
@@ -77,6 +81,7 @@ public class QuestionFrag extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // gets selected button and determines if the answer was correct
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 RadioButton selected = (RadioButton) rootView.findViewById(selectedId);
                 boolean correct = selected.getText().equals(correctAnswer);
@@ -91,11 +96,11 @@ public class QuestionFrag extends Fragment {
 
         return rootView;
     }
-//
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//
-//        this.hostActivity = activity;
-//    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        this.hostActivity = activity;
+    }
 }

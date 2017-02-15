@@ -1,6 +1,5 @@
 package quizdroid.yangf6.washington.edu.quizdroid;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AnswerFrag extends Fragment {
+public class AnswerFragment extends Fragment {
     private String userAnswer;
     private String correctAnswer;
     private int correctAnswerCount;
@@ -24,31 +23,34 @@ public class AnswerFrag extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-//            userAnswer = getArguments().getString("userAnswer");
-//            correctAnswer = getArguments().getString("correctAnswer");
+            userAnswer = getArguments().getString("userAnswer");
+            correctAnswer = getArguments().getString("correctAnswer");
             correctAnswerCount = getArguments().getInt("correctAnswers");
             topic = (Topic) getArguments().getSerializable("topic");
             questionNumber = getArguments().getInt("questionNumber");
         }
     }
 
-    public AnswerFrag() {}
+    public AnswerFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.answer_layout, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_answer, container, false);
 
-//        TextView userAnswerView = (TextView) rootView.findViewById(R.id.userAnswer);
-//        TextView correctAnswerView = (TextView) rootView.findViewById(R.id.correctAnswer);
-        TextView score = (TextView) rootView.findViewById(R.id.total_correct_text);
-        Button next = (Button) rootView.findViewById(R.id.next_btn);
+        // access text views and buttons on answer activity
+        TextView userAnswerView = (TextView) rootView.findViewById(R.id.userAnswer);
+        TextView correctAnswerView = (TextView) rootView.findViewById(R.id.correctAnswer);
+        TextView score = (TextView) rootView.findViewById(R.id.score);
+        Button next = (Button) rootView.findViewById(R.id.nextButton);
 
         // Sets correct page on the layout
-//        userAnswerView.setText(userAnswer);
-//        correctAnswerView.setText(correctAnswer);
+        userAnswerView.setText(userAnswer);
+        correctAnswerView.setText(correctAnswer);
         score.setText(correctAnswerCount + " answers correct out of " + (questionNumber + 1));
-        final boolean finished = (questionNumber == topic.getQ().size() - 1);
+        final boolean finished = (questionNumber == topic.getQuestions().size() - 1);
 
         if (finished) {
             next.setText("Finish");

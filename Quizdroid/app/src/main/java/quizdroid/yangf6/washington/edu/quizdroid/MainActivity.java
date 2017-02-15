@@ -1,17 +1,6 @@
 package quizdroid.yangf6.washington.edu.quizdroid;
 
-
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -28,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     private ListView topicList;
 
     @Override
@@ -36,16 +25,18 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        QuizApp quizApp = (QuizApp) getApplication();
-        final List<Topic> topics = quizApp.getTopics();
+        QuizApp app = (QuizApp) getApplication();
+        final List<Topic> topics = app.getAllTopics();
 
         String[] quizTopics = new String[topics.size()];
         for (int i = 0; i < topics.size(); i++) {
             quizTopics[i] = topics.get(i).getTitle();
         }
 
-        topicList = (ListView) findViewById(R.id.listView);
+        // Finds the topic list view
+        topicList = (ListView) findViewById(R.id.quizView);
 
+        // Populates the topic list view with stored quiz topics
         //ArrayAdapter<String> items = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, quizTopics);
         ArrayAdapter<String> items = new iconArrayAdapter(this, quizTopics);
         topicList.setAdapter(items);
