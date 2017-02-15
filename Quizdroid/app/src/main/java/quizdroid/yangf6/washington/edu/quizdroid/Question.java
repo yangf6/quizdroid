@@ -12,9 +12,9 @@ public class Question implements Serializable{
     private String anwser2;
     private String anwser3;
     private String anwser4;
-    private String correct;
+    private int correct;
 
-    public Question(String q, String a1, String a2, String a3, String a4, String c){
+    public Question(String q, String a1, String a2, String a3, String a4, int c){
         this.question = q;
         this.anwser1 = a1;
         this.anwser2 = a2;
@@ -36,7 +36,7 @@ public class Question implements Serializable{
         return question;
     }
 
-    public String getCorrect(){
+    public int getCorrect(){
         return correct;
     }
 
