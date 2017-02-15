@@ -34,12 +34,10 @@ public class ContentviewFrag extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_contentview, container, false);
 
-        // Gets views for description, topic, question
         TextView topicView = (TextView) rootView.findViewById(R.id.topic);
         TextView descriptionView = (TextView) rootView.findViewById(R.id.description);
         TextView questionView = (TextView) rootView.findViewById(R.id.questionCount);
 
-        // Sets text for views
         topicView.setText(topic.getTitle());
         descriptionView.setText(topic.getLong());
 

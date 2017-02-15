@@ -10,8 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="quizdroid.yangf6.washington.edu.quizdroid.MainActivity">
 
-    <ListView android:id="@+id/listView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+    <ListView
+        android:id="@+id/quizView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </RelativeLayout>
