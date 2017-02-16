@@ -33,15 +33,12 @@ public class MainActivity extends Activity {
             quizTopics[i] = topics.get(i).getTitle();
         }
 
-        // Finds the topic list view
         topicList = (ListView) findViewById(R.id.quizView);
 
-        // Populates the topic list view with stored quiz topics
-        //ArrayAdapter<String> items = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, quizTopics);
-        ArrayAdapter<String> items = new iconArrayAdapter(this, quizTopics);
+        ArrayAdapter<String> items = new ArrayAdapter<String>(this, android.R.layout., quizTopics);
+//        ArrayAdapter<String> items = new iconArrayAdapter(this, quizTopics);
         topicList.setAdapter(items);
 
-        // Begins the quiz as soon as the user clicks on a topic
         topicList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,12 +61,8 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

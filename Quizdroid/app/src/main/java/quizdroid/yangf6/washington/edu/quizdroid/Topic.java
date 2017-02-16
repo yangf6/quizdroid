@@ -7,9 +7,6 @@ import java.util.List;
  * Created by apple on 2/15/17.
  */
 
-// this class stores all the information that comes with a topic
-// this includes the topic's title, description, and list of question information
-// which can all be viewed
 class Topic implements Serializable {
     private String title;
     private String description;

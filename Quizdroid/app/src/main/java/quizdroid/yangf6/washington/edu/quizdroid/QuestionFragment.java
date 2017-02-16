@@ -20,7 +20,7 @@ public class QuestionFragment extends Fragment {
     private Activity hostActivity;
 
     public QuestionFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -39,7 +39,6 @@ public class QuestionFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_questions, container, false);
 
-        // gets the views for question, radio button options, and submit button
         TextView question = (TextView) rootView.findViewById(R.id.question);
         TextView answer1 = (TextView) rootView.findViewById(R.id.answer1);
         TextView answer2 = (TextView) rootView.findViewById(R.id.answer2);
@@ -47,8 +46,6 @@ public class QuestionFragment extends Fragment {
         TextView answer4 = (TextView) rootView.findViewById(R.id.answer4);
         final Button submit = (Button) rootView.findViewById(R.id.submitButton);
         final RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
-
-        // shows the next submit button as soon as an option is selected
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -56,7 +53,6 @@ public class QuestionFragment extends Fragment {
             }
         });
 
-        // populates views with question and answer options
         final Quiz curQuestion = topic.getQuestions().get(questionNumber);
         question.setText(curQuestion.getText());
         answer1.setText(curQuestion.getAnswer1());
@@ -81,7 +77,6 @@ public class QuestionFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // gets selected button and determines if the answer was correct
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 RadioButton selected = (RadioButton) rootView.findViewById(selectedId);
                 boolean correct = selected.getText().equals(correctAnswer);

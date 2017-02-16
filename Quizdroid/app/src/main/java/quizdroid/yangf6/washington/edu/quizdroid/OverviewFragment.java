@@ -15,7 +15,6 @@ public class OverviewFragment extends Fragment {
     private Activity hostActivity;
 
     public OverviewFragment() {
-        // Required empty public constructor
     }
 
     public int getShownIndex() {
@@ -36,12 +35,10 @@ public class OverviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_overview, container, false);
 
-        // Gets views for description, topic, question
         TextView topicView = (TextView) rootView.findViewById(R.id.topic);
         TextView descriptionView = (TextView) rootView.findViewById(R.id.description);
         TextView questionView = (TextView) rootView.findViewById(R.id.questionCount);
 
-        // Sets text for views
         topicView.setText(topic.getTitle());
         descriptionView.setText(topic.getDescription());
 

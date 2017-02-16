@@ -5,9 +5,7 @@ import java.io.Serializable;
 /**
  * Created by apple on 2/15/17.
  */
-// This class stores the information that comes with a question
-// it includes the question, 4 possible answers, and which # of the correct answer
-// which can all be viewed
+
 class Quiz implements Serializable {
     private String text;
     private String answer1;

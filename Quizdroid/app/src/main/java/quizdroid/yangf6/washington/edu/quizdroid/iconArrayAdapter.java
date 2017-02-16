@@ -19,7 +19,7 @@ public class iconArrayAdapter extends ArrayAdapter<String> {
     private final String[] values;
 
     public iconArrayAdapter(Context context, String[] values) {
-        super(context, R.layout.icon_layout, values);
+        super(context, R.layout.listview_topics, values);
         this.context = context;
         this.values = values;
     }
@@ -29,7 +29,7 @@ public class iconArrayAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.icon_layout, parent, false);
+        View rowView = inflater.inflate(R.layout.listview_topics, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.label);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         textView.setText(values[position]);
