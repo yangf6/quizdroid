@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by apple on 2/13/17.
+ * Created by apple on 2/15/17.
  */
 
-public class inMemoryRepository implements TopicRepository {
+// An implementation of a TopicRepository that has hardcoded values for the topics
+class InMemoryRepository implements ITopicRepository{
+    private List<Topic> topics;
 
-    private List<Topic> topics = new ArrayList<Topic>();
-
-    public inMemoryRepository() {
+    public InMemoryRepository() {
         topics = new ArrayList<Topic>();
 
         List<Quiz> mathQuestions = new ArrayList<Quiz>();
@@ -44,15 +44,16 @@ public class inMemoryRepository implements TopicRepository {
         topics.add(marvel);
     }
 
-    public inMemoryRepository(List<Topic> topics) {
-        this.topics = topics;
-    }
-
     public List<Topic> getAllTopics() {
         return topics;
     }
 
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
+    public Topic getTopicByTitle(String title) {
+        for (Topic topic : topics) {
+            if (topic.getTitle().equals(title)) {
+                return topic;
+            }
+        }
+        return null;
     }
 }
