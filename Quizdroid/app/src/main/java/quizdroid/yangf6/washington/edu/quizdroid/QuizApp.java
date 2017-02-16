@@ -68,15 +68,7 @@ public class QuizApp extends Application {
     public void onCreate() {
         Log.i("QuizApp", "onCreate() called");
         super.onCreate();
-
-        try { // gets the JSON and creates a new TopicRepository
-            InputStream inputStream = getAssets().open("questions.json");
-            String json = readJSONFile(inputStream);
-            repo = new JSONRepository(json);
-        } catch (IOException e) {
-            e.printStackTrace();
-            repo = new InMemoryRepository(); // if JSON fails, backup to use InMemoryRepo
-        }
+        repo = new InMemoryRepository(); // if JSON fails, backup to use InMemoryRepo
 
     }
 
@@ -84,13 +76,4 @@ public class QuizApp extends Application {
         return repo.getAllTopics();
     }
 
-    // reads given InputStream of JSON file and returns it in string format
-    private String readJSONFile(InputStream inputStream) throws IOException {
-        int size = inputStream.available();
-        byte[] buffer = new byte[size];
-        inputStream.read(buffer);
-        inputStream.close();
-
-        return new String(buffer, "UTF-8");
-    }
 }
