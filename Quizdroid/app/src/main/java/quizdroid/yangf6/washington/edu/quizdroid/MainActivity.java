@@ -35,8 +35,7 @@ public class MainActivity extends Activity {
 
         topicList = (ListView) findViewById(R.id.quizView);
 
-        ArrayAdapter<String> items = new ArrayAdapter<String>(this, android.R.layout., quizTopics);
-//        ArrayAdapter<String> items = new iconArrayAdapter(this, quizTopics);
+        ArrayAdapter<String> items = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, quizTopics);
         topicList.setAdapter(items);
 
         topicList.setOnItemClickListener(new ListView.OnItemClickListener() {

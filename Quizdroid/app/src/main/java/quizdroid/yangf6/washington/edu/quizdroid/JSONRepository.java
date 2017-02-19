@@ -11,8 +11,7 @@ import java.util.List;
  * Created by apple on 2/15/17.
  */
 
-// This is an implementation of a TopicRepository that gets it's topic information from
-// the given input stream JSON file
+
 class JSONRepository implements ITopicRepository {
     List<Topic> topics;
 
@@ -23,7 +22,6 @@ class JSONRepository implements ITopicRepository {
         try {
             JSONArray topics= new JSONArray(json);
 
-            // looks through each topic and parses the JSON to Quiz/Topic objects
             for (int i = 0; i < topics.length(); i++) {
                 JSONObject obj = topics.getJSONObject(i);
                 String title = obj.getString("title");
@@ -32,7 +30,6 @@ class JSONRepository implements ITopicRepository {
                 List<Quiz> topicQuestions = new ArrayList<Quiz>();
                 JSONArray questions = obj.getJSONArray("questions");
 
-                // looks through each question in a topic and adds it to its list of topic questions
                 for (int j = 0; j < questions.length(); j++) {
                     JSONObject jsonQuestion = questions.getJSONObject(j);
                     String question = jsonQuestion.getString("text");
