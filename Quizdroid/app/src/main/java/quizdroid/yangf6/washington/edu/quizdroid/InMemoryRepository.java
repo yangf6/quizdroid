@@ -20,24 +20,24 @@ class InMemoryRepository implements ITopicRepository{
 
         mathQuestions.add(new Quiz("What is 1 + 1?", "2", "11", "13", "4", 1));
         mathQuestions.add(new Quiz("What is 1 * 1?", "1", "3", "11", "111", 1));
-        physicsQuestions.add(new Quiz("Which law states the need to wear seatbelts?",
-                "Newton's First Law", "Newton's Second Law", "Newton's Third Law",
-                "none of the above", 3));
-        physicsQuestions.add(new Quiz("What is force?", "mass", "mass * acceleration",
-                "speed + time", "acceleration * speed", 2));
-        marvelQuestions.add(new Quiz("The Fantastic Four have the headquarters in what building?",
-                "Stark Tower", "Fantastic Headquarters", "Baxter Building",
-                "Xavier Institute", 3));
-        marvelQuestions.add(new Quiz("Peter Parker works as a photographer for:",
-                "The Daily Planet", "The Daily Bugle", "The New York Times",
-                "The Rolling Stone", 2));
+        physicsQuestions.add(new Quiz("is light a wave?",
+                "yes", "no", "unknown",
+                "none of the above", 1));
+        physicsQuestions.add(new Quiz("is light a practicle?", "yes", "no", "unknown",
+                "none of the above", 1));
+        marvelQuestions.add(new Quiz("how are you",
+                "a", "b", "c",
+                "d", 3));
+        marvelQuestions.add(new Quiz("how are you",
+                "a", "b", "c",
+                "d", 3));
 
 
-        Topic math = new Topic("Math","Worst topic of all time", mathQuestions);
-        Topic physics = new Topic("Physics", "Find out how close you compare to Albert",
+        Topic math = new Topic("Math","Math Descr", mathQuestions);
+        Topic physics = new Topic("Physics", "Physics Descr",
                 physicsQuestions);
         Topic marvel = new Topic("Marvel Super Heroes",
-                "Find out how much you know about Marvel\'s own superheroes", marvelQuestions);
+                "Marvel Desecr", marvelQuestions);
 
         topics.add(math);
         topics.add(physics);

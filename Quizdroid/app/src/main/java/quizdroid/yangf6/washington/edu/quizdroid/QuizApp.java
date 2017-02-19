@@ -66,9 +66,8 @@ public class QuizApp extends Application {
 
     @Override
     public void onCreate() {
-        Log.i("QuizApp", "onCreate() called");
         super.onCreate();
-        repo = new InMemoryRepository(); // if JSON fails, backup to use InMemoryRepo
+        repo = new InMemoryRepository();
 
     }
 
